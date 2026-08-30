@@ -39,7 +39,12 @@ Não há etapa de build, nem `package.json`, nem servidor — o projeto é feito
 │   │   └── hero-bg.mp4           # vídeo de fundo do Hero
 │   ├── logos/
 │   │   └── logo-icon.svg         # ícone da marca (nota + play)
-│   └── fonts/                    # reservado para a fonte oficial (ver abaixo)
+│   └── fonts/
+│       ├── hero-new-regular.woff
+│       ├── hero-new-medium.woff
+│       ├── hero-new-semibold.woff
+│       ├── hero-new-bold.woff
+│       └── hero-new-extrabold.woff
 └── README.md
 ```
 
@@ -53,7 +58,7 @@ Não é necessário instalar nada.
 ## Identidade visual
 
 - **Cores:** `#7B4FF5`, `#560FF3`, `#FFFFFF`, `#5D5C66`, definidas como variáveis CSS em `:root` no início de `style.css`.
-- **Tipografia:** a fonte oficial da marca é a **Hero New**. Como os arquivos dela ainda não foram disponibilizados, o projeto usa **Plus Jakarta Sans** (Google Fonts) como substituta temporária. A estrutura `@font-face` já está pronta e comentada no topo do `style.css` — basta adicionar os `.woff2` em `assets/fonts/` e descomentar o bloco quando a fonte chegar.
+- **Tipografia:** a fonte oficial da marca, **Hero New**, já está aplicada em todo o site via `@font-face` no topo do `style.css`, com os arquivos `.woff` em `assets/fonts/` (pesos: Regular, Medium, SemiBold, Bold e ExtraBold — os únicos usados no layout). A **Plus Jakarta Sans** continua declarada como fallback no CSS, caso a fonte não carregue por algum motivo.
 - **Vídeo do Hero:** vídeo de fundo em loop, sem áudio, levemente escurecido. É pausado automaticamente quando sai da tela e não é reproduzido caso o usuário tenha ativado a preferência de redução de movimento no sistema.
 
 ## Funcionalidades
@@ -85,6 +90,5 @@ Vale conferir também se o Instagram `@igrejacristaavivada`, usado como contato,
 
 ## Possíveis melhorias futuras
 
-- Trocar a Plus Jakarta Sans pela fonte oficial Hero New, assim que os arquivos estiverem disponíveis
 - Substituir o ícone SVG redesenhado pelo arquivo vetorial original, se houver
 - Incorporar um mapa (Google Maps) na seção de local

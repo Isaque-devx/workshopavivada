@@ -7,51 +7,44 @@
 
 /* --------------------------------------------------------------------------
    1. FONTE — Hero New
-   A fonte oficial da marca é a "Hero New", mas os arquivos dela ainda não
-   foram enviados pra esse projeto. Por isso o @font-face abaixo está
-   comentado — quando os .woff2 chegarem, é só jogar em assets/fonts/ e
-   descomentar o bloco (confira se os nomes dos arquivos batem).
-   Por enquanto, quem tá segurando a onda é a "Plus Jakarta Sans" (do Google
-   Fonts), que tem uma pegada visual parecida com a Hero New.
+   Fonte oficial da marca. Arquivos em assets/fonts/, formato .woff.
    -------------------------------------------------------------------------- */
 
-/*
 @font-face {
   font-family: "Hero New";
-  src: url("../assets/fonts/hero-new-extrabold.woff2") format("woff2");
+  src: url("../assets/fonts/hero-new-extrabold.woff") format("woff");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Hero New";
-  src: url("../assets/fonts/hero-new-bold.woff2") format("woff2");
+  src: url("../assets/fonts/hero-new-bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Hero New";
-  src: url("../assets/fonts/hero-new-semibold.woff2") format("woff2");
+  src: url("../assets/fonts/hero-new-semibold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Hero New";
-  src: url("../assets/fonts/hero-new-medium.woff2") format("woff2");
+  src: url("../assets/fonts/hero-new-medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Hero New";
-  src: url("../assets/fonts/hero-new-regular.woff2") format("woff2");
+  src: url("../assets/fonts/hero-new-regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-*/
 
 /* --------------------------------------------------------------------------
    2. VARIÁVEIS GLOBAIS (design tokens)
@@ -78,9 +71,9 @@
   --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   --gradient-glow: radial-gradient(circle, rgba(123, 79, 245, 0.55) 0%, rgba(86, 15, 243, 0) 70%);
 
-  /* Fontes — Hero New é a ideal, Plus Jakarta Sans é quem cobre por ora */
-  --font-display: "Plus Jakarta Sans", "Hero New", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-body: "Plus Jakarta Sans", "Hero New", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Fontes — Hero New é a fonte oficial da marca */
+  --font-display: "Hero New", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Hero New", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --fs-h1: clamp(2.35rem, 1.35rem + 4.6vw, 4.7rem);
   --fs-h2: clamp(1.65rem, 1.3rem + 1.5vw, 2.35rem);
