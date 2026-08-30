@@ -89,23 +89,6 @@
   }
 
   /* ------------------------------------------------------------------------
-     Barrinha de progresso no topo (mostra o quanto já rolou da página)
-     ---------------------------------------------------------------------- */
-  const progressFill = document.getElementById("progressFill");
-
-  const updateProgressBar = () => {
-    if (!progressFill) return;
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    progressFill.style.width = `${percent}%`;
-  };
-
-  updateProgressBar();
-  window.addEventListener("scroll", updateProgressBar, { passive: true });
-  window.addEventListener("resize", updateProgressBar);
-
-  /* ------------------------------------------------------------------------
      Menu mobile (abre/fecha, e fecha sozinho com Esc ou ao clicar num link)
      ---------------------------------------------------------------------- */
   const menuToggle = document.getElementById("menuToggle");

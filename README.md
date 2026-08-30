@@ -60,7 +60,6 @@ Não é necessário instalar nada.
 
 - Header que ganha fundo com blur ao rolar a página
 - Menu mobile acessível, com fechamento por `Esc` ou clique em item
-- Barra de progresso de leitura no topo
 - Contagem regressiva até o evento, no Hero (dias, horas, minutos e segundos)
 - Acordeão de perguntas frequentes (FAQ), navegável por teclado
 - Animações de entrada dos elementos ao rolar a página

@@ -311,31 +311,11 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   5. BARRA DE PROGRESSO
-   Aquela linha fininha no topo que enche conforme o usuário rola a página.
-   -------------------------------------------------------------------------- */
-.progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: rgba(123, 79, 245, 0.12);
-  z-index: 1001;
-}
-.progress-bar__fill {
-  height: 100%;
-  width: 0%;
-  background: var(--gradient-primary);
-  transition: width 0.1s linear;
-}
-
-/* --------------------------------------------------------------------------
-   6. HEADER (topo fixo + menu mobile)
+   5. HEADER (topo fixo + menu mobile)
    -------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
-  top: 3px;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
