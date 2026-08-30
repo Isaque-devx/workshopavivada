@@ -210,10 +210,30 @@ svg { display: block; }
   content: "";
   width: 22px;
   height: 2px;
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   border-radius: 2px;
 }
 .section--dark .eyebrow { color: #C4AEFF; }
+
+/* Tipografia sem gradientes: todos os textos permanecem em cor sólida. */
+.hero__title,
+.hero__title .line,
+.hero__title .line--accent,
+.hero__title .line--with,
+.hero__title .line--name,
+.eyebrow,
+.section-head,
+.ministracao__role,
+.ministracao__bio,
+.badge,
+.inscricao__price-value,
+.inscricao__note,
+.btn {
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
 
 h1 {
   font-family: var(--font-display);
@@ -264,7 +284,7 @@ h3 {
 .btn:active { transform: scale(0.97); }
 
 .btn--primary {
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   color: var(--color-white);
   box-shadow: var(--shadow-glow);
 }
@@ -463,10 +483,8 @@ h3 {
 .hero__title { color: var(--color-white); }
 .hero__title .line { display: block; }
 .hero__title .line--accent {
-  background: linear-gradient(100deg, #C6AFFF 0%, var(--color-primary) 45%, #9B6BFF 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  background: none;
+  color: var(--color-primary);
 }
 .hero__title .line--with {
   font-size: 0.42em;
@@ -819,8 +837,8 @@ h3 {
 .cta-final__glow {
   position: absolute;
   inset: 0;
-  background: var(--gradient-glow);
-  opacity: 0.7;
+  background: var(--color-bg-dark);
+  opacity: 1;
 }
 .cta-final__inner {
   position: relative;
@@ -856,6 +874,18 @@ h3 {
 .footer__col h3 { color: var(--color-white); font-size: 0.95rem; margin-bottom: var(--space-sm); }
 .footer__col ul { display: grid; gap: var(--space-2xs); font-size: 0.88rem; }
 .footer__col a:hover { color: var(--color-white); }
+
+.footer__instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer__instagram-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
 .footer__bottom {
   display: flex;
   justify-content: space-between;
