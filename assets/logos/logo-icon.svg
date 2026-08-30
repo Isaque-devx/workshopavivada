@@ -1,0 +1,15 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Louvor &amp; Adoração — Workshop com Nívea Izabella</title>
+  <defs>
+    <linearGradient id="logoGradient" x1="4" y1="6" x2="44" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9B7BFF"/>
+      <stop offset="1" stop-color="#560FF3"/>
+    </linearGradient>
+  </defs>
+  <!-- Triângulo "play" -->
+  <path d="M8 7.5C8 5.2 10.5 3.8 12.5 5L40 21.5C42 22.7 42 25.5 40 26.7L12.5 43.2C10.5 44.4 8 43 8 40.7V7.5Z"
+        stroke="url(#logoGradient)" stroke-width="3.4" stroke-linejoin="round" fill="none"/>
+  <!-- Nota musical -->
+  <circle cx="17.5" cy="30.5" r="6" fill="url(#logoGradient)"/>
+  <rect x="21.8" y="10" width="3.2" height="21" rx="1.6" fill="url(#logoGradient)"/>
+</svg>
