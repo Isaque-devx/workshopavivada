@@ -1,6 +1,6 @@
 /* ==========================================================================
-   WORKSHOP DE LOUVOR & ADORAÇÃO — script.js
-   JavaScript moderno (ES6+), sem dependências externas.
+   Workshop de Louvor & Adoração — script.js
+   JS puro (sem libs). Cada bloco abaixo cuida de uma parte da página.
    ========================================================================== */
 
 (() => {
@@ -9,7 +9,7 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ------------------------------------------------------------------------
-     1. HEADER — muda de aparência ao rolar a página
+     Header: adiciona um fundo/blur quando o usuário rola a página
      ---------------------------------------------------------------------- */
   const header = document.getElementById("siteHeader");
 
@@ -22,9 +22,10 @@
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   /* ------------------------------------------------------------------------
-     2. VÍDEO DE FUNDO DO HERO
-     Respeita prefers-reduced-motion (não autoplay) e pausa quando a seção
-     sai da viewport, para economizar performance/bateria.
+     Vídeo de fundo do Hero
+     Se o usuário pediu "menos animação" no sistema, nem toca o vídeo.
+     Fora isso, só fica rodando enquanto o Hero está visível na tela —
+     assim não gasta processamento/bateria à toa com a página rolada.
      ---------------------------------------------------------------------- */
   const heroVideo = document.getElementById("heroVideo");
 
@@ -50,7 +51,45 @@
   }
 
   /* ------------------------------------------------------------------------
-     3. BARRA DE PROGRESSO DE LEITURA (elemento de assinatura)
+     Contagem regressiva até o evento (26/09/2026, 15h, horário de Brasília)
+     Atualiza a cada segundo. Se o evento já começou, mostra zerado.
+     ---------------------------------------------------------------------- */
+  const EVENT_DATE = new Date("2026-09-26T15:00:00-03:00");
+  const countdownEl = document.getElementById("countdown");
+
+  if (countdownEl) {
+    const cdDays = document.getElementById("cdDays");
+    const cdHours = document.getElementById("cdHours");
+    const cdMinutes = document.getElementById("cdMinutes");
+    const cdSeconds = document.getElementById("cdSeconds");
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    const updateCountdown = () => {
+      const diff = EVENT_DATE.getTime() - Date.now();
+
+      if (diff <= 0) {
+        cdDays.textContent = "00";
+        cdHours.textContent = "00";
+        cdMinutes.textContent = "00";
+        cdSeconds.textContent = "00";
+        clearInterval(countdownTimer);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      cdDays.textContent = pad(Math.floor(totalSeconds / 86400));
+      cdHours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+      cdMinutes.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+      cdSeconds.textContent = pad(totalSeconds % 60);
+    };
+
+    updateCountdown();
+    const countdownTimer = setInterval(updateCountdown, 1000);
+  }
+
+  /* ------------------------------------------------------------------------
+     Barrinha de progresso no topo (mostra o quanto já rolou da página)
      ---------------------------------------------------------------------- */
   const progressFill = document.getElementById("progressFill");
 
@@ -67,7 +106,7 @@
   window.addEventListener("resize", updateProgressBar);
 
   /* ------------------------------------------------------------------------
-     4. MENU MOBILE
+     Menu mobile (abre/fecha, e fecha sozinho com Esc ou ao clicar num link)
      ---------------------------------------------------------------------- */
   const menuToggle = document.getElementById("menuToggle");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -105,7 +144,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. FAQ — ACORDEÃO ACESSÍVEL VIA TECLADO
+     FAQ (acordeão): clicou, abre; clica em outra pergunta, a anterior fecha
      ---------------------------------------------------------------------- */
   const faqItems = document.querySelectorAll(".faq__item");
 
@@ -116,7 +155,7 @@
     button.addEventListener("click", () => {
       const isOpen = item.dataset.open === "true";
 
-      // Fecha os demais itens para manter apenas uma resposta visível por vez
+      // deixa só uma pergunta aberta por vez — fecha todas as outras antes
       faqItems.forEach((otherItem) => {
         otherItem.dataset.open = "false";
         const otherButton = otherItem.querySelector(".faq__question");
@@ -131,7 +170,7 @@
   });
 
   /* ------------------------------------------------------------------------
-     6. ANIMAÇÕES DE ENTRADA (IntersectionObserver)
+     Animação de "surgir" quando o elemento entra na tela
      ---------------------------------------------------------------------- */
   const revealTargets = document.querySelectorAll("[data-reveal]");
 
@@ -154,7 +193,8 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. FECHA O MENU MOBILE AO REDIMENSIONAR PARA DESKTOP
+     Se a tela for redimensionada para o tamanho de desktop, fecha o menu
+     mobile (evita ele ficar "preso" aberto ao virar a tela, por exemplo)
      ---------------------------------------------------------------------- */
   window.addEventListener("resize", () => {
     if (window.innerWidth > 860) closeMobileMenu();

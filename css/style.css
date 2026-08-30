@@ -1,17 +1,18 @@
 /* ==========================================================================
-   WORKSHOP DE LOUVOR & ADORAÇÃO — COM NÍVEA IZABELLA
+   Workshop de Louvor & Adoração com Nívea Izabella
    Igreja Cristã Avivada / Ministério Palavra Viva
-   Folha de estilos principal
+   Estilos da landing page — organizado em blocos numerados, cada um
+   cuidando de uma parte da página (header, hero, seções, etc.)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. FONTE — Hero New
-   Os arquivos oficiais da fonte "Hero New" não foram enviados neste projeto.
-   A estrutura @font-face abaixo já está pronta: assim que os arquivos .woff2
-   forem adicionados em assets/fonts/, basta descomentar o bloco e ajustar
-   os nomes de arquivo. Enquanto isso, usamos "Plus Jakarta Sans" (Google
-   Fonts, carregada no <head>) como substituta, por ter a mesma personalidade
-   geométrica e arredondada da Hero New.
+   A fonte oficial da marca é a "Hero New", mas os arquivos dela ainda não
+   foram enviados pra esse projeto. Por isso o @font-face abaixo está
+   comentado — quando os .woff2 chegarem, é só jogar em assets/fonts/ e
+   descomentar o bloco (confira se os nomes dos arquivos batem).
+   Por enquanto, quem tá segurando a onda é a "Plus Jakarta Sans" (do Google
+   Fonts), que tem uma pegada visual parecida com a Hero New.
    -------------------------------------------------------------------------- */
 
 /*
@@ -53,16 +54,18 @@
 */
 
 /* --------------------------------------------------------------------------
-   2. TOKENS
+   2. VARIÁVEIS GLOBAIS (design tokens)
+   Tudo que se repete pela página — cores, fontes, espaçamentos — mora
+   aqui. Mudou algo aqui, muda no site inteiro de uma vez só.
    -------------------------------------------------------------------------- */
 :root {
-  /* Cores oficiais da identidade visual */
+  /* Cores oficiais da marca */
   --color-primary: #7B4FF5;
   --color-secondary: #560FF3;
   --color-white: #FFFFFF;
   --color-text: #5D5C66;
 
-  /* Derivadas da paleta oficial (fundo, superfícies, glow) */
+  /* Tons derivados das cores acima (fundos escuros, superfícies, brilho) */
   --color-bg-dark: #0A0714;
   --color-bg-dark-alt: #120A28;
   --color-bg-light: #FAF9FF;
@@ -75,7 +78,7 @@
   --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   --gradient-glow: radial-gradient(circle, rgba(123, 79, 245, 0.55) 0%, rgba(86, 15, 243, 0) 70%);
 
-  /* Tipografia — Hero New (fallback Plus Jakarta Sans) */
+  /* Fontes — Hero New é a ideal, Plus Jakarta Sans é quem cobre por ora */
   --font-display: "Plus Jakarta Sans", "Hero New", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: "Plus Jakarta Sans", "Hero New", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -118,6 +121,7 @@
 
 /* --------------------------------------------------------------------------
    3. RESET
+   Zera estilos padrão do navegador pra começar do zero, sem surpresa.
    -------------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -150,7 +154,7 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 
 svg { display: block; }
 
-/* Foco visível para acessibilidade */
+/* Contorno ao navegar com teclado (Tab) — importante pra acessibilidade */
 :focus-visible {
   outline: 2.5px solid var(--color-primary);
   outline-offset: 3px;
@@ -182,7 +186,9 @@ svg { display: block; }
 }
 
 /* --------------------------------------------------------------------------
-   4. UTILITÁRIOS
+   4. CLASSES DE USO GERAL
+   Peças reaproveitadas em várias seções (container, títulos, seções claras
+   e escuras, etc.)
    -------------------------------------------------------------------------- */
 .container {
   width: var(--container-width);
@@ -215,7 +221,7 @@ svg { display: block; }
 }
 .section--dark .eyebrow { color: #C4AEFF; }
 
-/* Tipografia sem gradientes: todos os textos permanecem em cor sólida. */
+/* Garante que nenhum desses textos use gradiente — só cor sólida mesmo */
 .hero__title,
 .hero__title .line,
 .hero__title .line--accent,
@@ -268,7 +274,7 @@ h3 {
 }
 .section-head p { font-size: var(--fs-desc); font-weight: 400; }
 
-/* Botões */
+/* Botões (o "primary" roxo cheio e o "ghost" só com borda) */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -297,7 +303,7 @@ h3 {
 }
 .btn--ghost:hover { border-color: var(--color-white); background: rgba(255, 255, 255, 0.06); }
 
-/* Ícone "play" dentro dos botões — motivo assinatura da marca */
+/* Ícone de "play" que aparece dentro dos botões (detalhe da identidade visual) */
 .btn__play {
   width: 18px;
   height: 18px;
@@ -305,7 +311,8 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   5. BARRA DE PROGRESSO (elemento de assinatura — "trilha" de leitura)
+   5. BARRA DE PROGRESSO
+   Aquela linha fininha no topo que enche conforme o usuário rola a página.
    -------------------------------------------------------------------------- */
 .progress-bar {
   position: fixed;
@@ -324,7 +331,7 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   6. HEADER
+   6. HEADER (topo fixo + menu mobile)
    -------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
@@ -429,7 +436,7 @@ h3 {
 .mobile-menu a { font-size: 1.4rem; font-weight: 700; color: var(--color-white); font-family: var(--font-display); }
 
 /* --------------------------------------------------------------------------
-   7. HERO
+   7. HERO (a primeira seção, com o vídeo de fundo e a chamada principal)
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
@@ -458,7 +465,7 @@ h3 {
   display: none;
 }
 
-/* Camada escura sobre o vídeo, para garantir contraste do texto */
+/* Escurece o vídeo por baixo do texto, senão o texto fica difícil de ler */
 .hero__scrim {
   position: absolute;
   inset: 0;
@@ -509,6 +516,42 @@ h3 {
 .hero__meta-item svg { width: 22px; height: 22px; color: var(--color-primary); flex-shrink: 0; }
 .hero__meta-item strong { display: block; color: var(--color-white); font-size: 0.95rem; font-weight: 700; }
 .hero__meta-item span { display: block; font-size: 0.8rem; color: var(--color-text-on-dark-muted); }
+
+/* Contagem regressiva até o evento */
+.hero__countdown { display: flex; flex-direction: column; align-items: center; gap: var(--space-2xs); }
+.hero__countdown-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-on-dark-muted);
+}
+.hero__countdown-grid { display: flex; gap: var(--space-sm); }
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3xs);
+  min-width: 64px;
+  padding: var(--space-xs) var(--space-2xs);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-surface-dark-border);
+}
+.countdown__value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  color: var(--color-white);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.countdown__unit-label {
+  font-size: 0.7rem;
+  color: var(--color-text-on-dark-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
 
 .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
 
@@ -581,28 +624,7 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   8. DIVISOR "WAVEFORM" — elemento de assinatura entre seções
-   -------------------------------------------------------------------------- */
-.waveform-divider {
-  display: block;
-  width: 100%;
-  height: 46px;
-  color: var(--color-primary);
-}
-.waveform-divider--dark-to-light { background: var(--color-bg-dark); }
-.waveform-divider--light-to-dark { background: var(--color-bg-light); }
-.waveform-divider rect {
-  animation: waveform 2.6s ease-in-out infinite;
-  transform-origin: center;
-}
-
-@keyframes waveform {
-  0%, 100% { transform: scaleY(0.4); }
-  50% { transform: scaleY(1); }
-}
-
-/* --------------------------------------------------------------------------
-   9. SOBRE
+   8. SEÇÃO "SOBRE O WORKSHOP"
    -------------------------------------------------------------------------- */
 .sobre__grid {
   display: grid;
@@ -630,7 +652,7 @@ h3 {
 .sobre__list p { font-size: var(--fs-desc); }
 
 /* --------------------------------------------------------------------------
-   10. MINISTRAÇÃO (Nívea Izabella)
+   9. SEÇÃO "MINISTRAÇÃO" (bio e números da Nívea Izabella)
    -------------------------------------------------------------------------- */
 .ministracao { overflow: hidden; }
 .ministracao__grid {
@@ -713,7 +735,7 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   11. DATA / HORÁRIO / LOCAL
+   10. SEÇÃO "DATA, HORÁRIO E LOCAL" (os três cards de informação)
    -------------------------------------------------------------------------- */
 .detalhes__grid {
   display: grid;
@@ -745,7 +767,7 @@ h3 {
 .detalhes__card a:hover { text-decoration: underline; }
 
 /* --------------------------------------------------------------------------
-   12. INSCRIÇÃO
+   11. SEÇÃO "INSCRIÇÃO" (o card com o preço e o botão de inscrever)
    -------------------------------------------------------------------------- */
 .inscricao-section { position: relative; overflow: hidden; }
 .inscricao__panel {
@@ -776,7 +798,7 @@ h3 {
 .inscricao__note { font-size: 0.8rem; color: var(--color-text-on-dark-muted); }
 
 /* --------------------------------------------------------------------------
-   13. FAQ
+   12. FAQ (o acordeão de perguntas e respostas)
    -------------------------------------------------------------------------- */
 .faq__list { display: grid; gap: var(--space-sm); max-width: 820px; }
 .faq__item {
@@ -825,7 +847,7 @@ h3 {
 .faq__item[data-open="true"] .faq__answer { grid-template-rows: 1fr; }
 
 /* --------------------------------------------------------------------------
-   14. CTA FINAL
+   13. CHAMADA FINAL (o último empurrão antes do rodapé)
    -------------------------------------------------------------------------- */
 .cta-final {
   text-align: center;
@@ -853,7 +875,7 @@ h3 {
 .cta-final h2 { color: var(--color-white); }
 
 /* --------------------------------------------------------------------------
-   15. FOOTER
+   14. RODAPÉ
    -------------------------------------------------------------------------- */
 .site-footer {
   background: #06040D;
@@ -896,7 +918,9 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   16. ANIMAÇÕES DE ENTRADA (reveal via IntersectionObserver)
+   15. ANIMAÇÃO DE "APARECER" AO ROLAR A PÁGINA
+   Controlada pelo JS: elemento começa invisível/deslocado e o script
+   adiciona a classe .is-visible quando ele entra na tela.
    -------------------------------------------------------------------------- */
 [data-reveal] {
   opacity: 0;
@@ -914,7 +938,8 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   17. RESPONSIVIDADE
+   16. RESPONSIVIDADE
+   Ajustes por tamanho de tela, do maior pro menor (tablet → mobile).
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .hero__grid { grid-template-columns: 1fr; }
@@ -948,4 +973,5 @@ h3 {
 
 @media (max-width: 400px) {
   .hero__meta-item strong { font-size: 0.88rem; }
+  .countdown__unit { min-width: 54px; padding: var(--space-2xs); }
 }

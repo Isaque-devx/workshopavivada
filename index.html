@@ -24,7 +24,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/logos/logo-icon.svg">
 
-  <!-- Fonte substituta (ver nota sobre Hero New no topo do style.css) -->
+  <!-- Fonte usada por enquanto, no lugar da Hero New (detalhes no topo do style.css) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -133,6 +133,28 @@
             </div>
           </div>
 
+          <div class="hero__countdown" id="countdown" data-reveal>
+            <p class="hero__countdown-label">Faltam</p>
+            <div class="hero__countdown-grid">
+              <div class="countdown__unit">
+                <span class="countdown__value" id="cdDays">00</span>
+                <span class="countdown__unit-label">dias</span>
+              </div>
+              <div class="countdown__unit">
+                <span class="countdown__value" id="cdHours">00</span>
+                <span class="countdown__unit-label">horas</span>
+              </div>
+              <div class="countdown__unit">
+                <span class="countdown__value" id="cdMinutes">00</span>
+                <span class="countdown__unit-label">min</span>
+              </div>
+              <div class="countdown__unit">
+                <span class="countdown__value" id="cdSeconds">00</span>
+                <span class="countdown__unit-label">seg</span>
+              </div>
+            </div>
+          </div>
+
           <div class="hero__actions" data-reveal>
             <a class="btn btn--primary" href="[LINK DE INSCRIÇÃO]">
               <svg class="btn__play" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 3.6C5 2.7 6 2.1 6.8 2.6L13.7 7C14.4 7.5 14.4 8.5 13.7 9L6.8 13.4C6 13.9 5 13.3 5 12.4V3.6Z" fill="currentColor"/></svg>
@@ -149,12 +171,6 @@
         <span class="hero__scroll-line"></span>
       </div>
     </section>
-
-    <svg class="waveform-divider waveform-divider--dark-to-light" viewBox="0 0 400 46" preserveAspectRatio="none" aria-hidden="true">
-      <g fill="currentColor" opacity="0.55">
-        <rect x="0" y="18" width="4" height="10"/><rect x="10" y="12" width="4" height="22"/><rect x="20" y="8" width="4" height="30"/><rect x="30" y="16" width="4" height="14"/><rect x="40" y="4" width="4" height="38"/><rect x="50" y="14" width="4" height="18"/><rect x="60" y="20" width="4" height="6"/><rect x="70" y="10" width="4" height="26"/><rect x="80" y="6" width="4" height="34"/><rect x="90" y="16" width="4" height="14"/><rect x="100" y="12" width="4" height="22"/><rect x="110" y="18" width="4" height="10"/><rect x="120" y="8" width="4" height="30"/><rect x="130" y="14" width="4" height="18"/><rect x="140" y="4" width="4" height="38"/><rect x="150" y="16" width="4" height="14"/><rect x="160" y="10" width="4" height="26"/><rect x="170" y="20" width="4" height="6"/><rect x="180" y="6" width="4" height="34"/><rect x="190" y="12" width="4" height="22"/><rect x="200" y="18" width="4" height="10"/><rect x="210" y="8" width="4" height="30"/><rect x="220" y="14" width="4" height="18"/><rect x="230" y="4" width="4" height="38"/><rect x="240" y="16" width="4" height="14"/><rect x="250" y="10" width="4" height="26"/><rect x="260" y="20" width="4" height="6"/><rect x="270" y="6" width="4" height="34"/><rect x="280" y="12" width="4" height="22"/><rect x="290" y="18" width="4" height="10"/><rect x="300" y="8" width="4" height="30"/><rect x="310" y="14" width="4" height="18"/><rect x="320" y="4" width="4" height="38"/><rect x="330" y="16" width="4" height="14"/><rect x="340" y="10" width="4" height="26"/><rect x="350" y="20" width="4" height="6"/><rect x="360" y="6" width="4" height="34"/><rect x="370" y="12" width="4" height="22"/><rect x="380" y="18" width="4" height="10"/><rect x="390" y="8" width="4" height="30"/>
-      </g>
-    </svg>
 
     <!-- SOBRE -->
     <section class="section section--light sobre" id="sobre">
