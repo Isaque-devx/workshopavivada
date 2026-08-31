@@ -8,7 +8,7 @@ Landing page de divulgação e inscrição do **Workshop de Louvor & Adoração*
 |---|---|
 | **Data** | 26 de setembro de 2026 (sábado) |
 | **Horário** | 15h às 18h |
-| **Local** | Igreja Cristã Avivada — Rua 95, nº 21, João XXIII, Timóteo - MG |
+| **Local** | Igreja Cristã Avivada — Rua 95, nº 2, João XXIII, Timóteo - MG |
 | **Investimento** | R$ 40,00 |
 | **Ministração** | Nívea Izabella — cantora, professora de canto e instrutora ministerial |
 
@@ -87,8 +87,3 @@ Os campos abaixo aparecem como placeholder no código e precisam ser preenchidos
 | `[LINK DE INSCRIÇÃO]` | Botões de inscrição (header, hero, seção de inscrição, FAQ, CTA final) e `<link rel="canonical">` |
 
 Vale conferir também se o Instagram `@igrejacristaavivada`, usado como contato, está correto.
-
-## Possíveis melhorias futuras
-
-- Substituir o ícone SVG redesenhado pelo arquivo vetorial original, se houver
-- Incorporar um mapa (Google Maps) na seção de local
