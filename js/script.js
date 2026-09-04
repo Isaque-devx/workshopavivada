@@ -35,7 +35,8 @@
 
     const loadHeroVideo = () => {
       if (heroVideoLoaded || prefersReducedMotion) return;
-      const src = heroVideo.dataset.src;
+      const isMobile = window.matchMedia("(max-width: 860px)").matches;
+      const src = isMobile ? heroVideo.dataset.srcMobile : heroVideo.dataset.srcDesktop;
       if (!src) return;
 
       heroVideo.src = src;
@@ -198,6 +199,7 @@
 
     revealTargets.forEach((el) => revealObserver.observe(el));
   }
+
 
   /* ------------------------------------------------------------------------
      Se a tela for redimensionada para o tamanho de desktop, fecha o menu

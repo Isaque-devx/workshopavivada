@@ -76,9 +76,11 @@ Não há etapa de build e não existe `package.json`. O projeto pode ser aberto 
 ├── assets/
 │   ├── images/
 │   │   ├── hero-art.jpg
-│   │   └── hero-bg-poster.jpg
+│   │   ├── hero-bg-poster.jpg
+│   │   └── og-workshop.jpg
 │   ├── videos/
-│   │   └── hero-bg.mp4
+│   │   ├── hero-bg.mp4
+│   │   └── hero-bg-mobile.mp4
 │   ├── logos/
 │   │   └── logo-icon.svg
 │   └── fonts/
@@ -87,18 +89,36 @@ Não há etapa de build e não existe `package.json`. O projeto pode ser aberto 
 │       ├── hero-new-semibold.woff
 │       ├── hero-new-bold.woff
 │       └── hero-new-extrabold.woff
+├── 404.html
+├── robots.txt
 └── README.md
 ```
 
 ### Principais arquivos
 
-- `index.html` — estrutura e conteúdo da landing page.
+- `index.html` — estrutura, conteúdo, SEO, Open Graph e dados estruturados do evento.
 - `css/style.css` — estilos, responsividade e identidade visual.
-- `js/script.js` — interações da página.
-- `assets/images/` — imagens utilizadas no site.
-- `assets/videos/` — vídeo de fundo do Hero.
+- `js/script.js` — interações e carregamento otimizado do vídeo.
+- `assets/images/` — imagens utilizadas no site, incluindo a imagem específica para compartilhamento social.
+- `assets/videos/` — versões desktop e mobile do vídeo de fundo do Hero.
 - `assets/logos/` — elementos de identidade visual.
 - `assets/fonts/` — arquivos da fonte Hero New.
+- `404.html` — página personalizada para URLs inexistentes.
+- `robots.txt` — orientação básica para rastreadores.
+
+## SEO e compartilhamento
+
+A versão atual inclui otimizações específicas para mecanismos de busca e compartilhamento:
+
+- **Canonical** apontando para a URL oficial da landing page:
+  `https://workshopniveaizabella.netlify.app/`
+- Meta tags **Open Graph** com URLs absolutas.
+- **Twitter Card** com imagem e texto alternativos.
+- Imagem dedicada de compartilhamento social em `assets/images/og-workshop.jpg`, no formato **1200×630**.
+- Dados estruturados **JSON-LD do tipo Event**, com data, horário, local, organizador e link de inscrição.
+- `preconnect` para o domínio externo utilizado no processo de inscrição.
+
+O canonical identifica a landing page como URL preferencial para indexação; o link da e-inscrição continua sendo utilizado somente como destino das inscrições.
 
 ## Funcionalidades
 
@@ -112,6 +132,7 @@ Não há etapa de build e não existe `package.json`. O projeto pode ser aberto 
 - Animações de entrada dos elementos conforme aparecem na tela.
 - Pausa do vídeo do Hero quando ele deixa de estar visível.
 - Respeito à preferência do sistema por redução de movimento (`prefers-reduced-motion`).
+- CTA de inscrição integrado às seções da página, **sem botão flutuante/fixo no mobile**, preservando uma interface mais limpa.
 
 ## Contagem regressiva
 
@@ -129,15 +150,22 @@ As cores e demais estilos estão definidos no `css/style.css`.
 
 A tipografia principal utilizada é a **Hero New**, disponibilizada localmente pelos arquivos `.woff` presentes em `assets/fonts/`.
 
-## Vídeo do Hero
+## Vídeo do Hero e performance
 
 O Hero utiliza um vídeo de fundo em loop e sem áudio, acompanhado de uma imagem de fallback (`hero-bg-poster.jpg`).
 
-Para otimizar o uso de recursos:
+A estratégia atual utiliza duas versões do vídeo:
 
-- O vídeo é reproduzido enquanto o Hero está visível.
-- Ele é pausado quando sai da área visível da página.
-- Usuários com `prefers-reduced-motion` ativado não reproduzem o vídeo.
+- `hero-bg.mp4` — versão principal para telas maiores.
+- `hero-bg-mobile.mp4` — versão mais leve para dispositivos móveis.
+
+O JavaScript escolhe a versão adequada ao viewport e somente inicia o carregamento quando o Hero está próximo da área visível. Quando o Hero sai da área visível, o vídeo é pausado.
+
+Também são respeitados:
+
+- `prefers-reduced-motion`, evitando a reprodução quando o usuário prefere menos movimento.
+- Carregamento tardio do vídeo para evitar uma requisição pesada desnecessária antes do uso.
+- Imagem de poster para manter o Hero visualmente pronto enquanto o vídeo não foi carregado.
 
 ## Acessibilidade e performance
 
@@ -153,6 +181,9 @@ O projeto inclui recursos básicos de acessibilidade e otimização, como:
 - Carregamento `lazy` para imagens secundárias.
 - Script JavaScript carregado com `defer`.
 - Suporte à preferência de redução de movimento.
+- Layout responsivo sem duplicação de HTML para mobile.
+- Proteções contra overflow horizontal em telas pequenas.
+- Botões e áreas de toque dimensionados para uso em dispositivos móveis.
 
 ## Como executar
 
@@ -165,6 +196,7 @@ Como o projeto é estático e não possui processo de build, ele pode ser execut
 
 ## Contatos e links
 
+- **Site:** https://workshopniveaizabella.netlify.app/
 - **Inscrições:** https://www.e-inscricao.com/igreja-crist-avivada/workshopniveaisabella
 - **Instagram:** https://instagram.com/igrejacristaavivada
 - **Localização:** link do Google Maps disponível no botão "Ver no mapa" da página.

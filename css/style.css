@@ -273,7 +273,6 @@ h3 {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 .btn:active { transform: scale(0.97); }
-
 .btn--primary {
   background: var(--color-primary);
   color: var(--color-white);
@@ -933,7 +932,6 @@ h3 {
 
 @media (max-width: 640px) {
   .site-header { min-height: var(--header-height); }
-
   :root {
     --header-height: 68px;
     --container-width: min(1180px, calc(100% - 2rem));
