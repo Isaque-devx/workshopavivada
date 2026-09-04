@@ -397,15 +397,16 @@ h3 {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  top: var(--header-height);
+  height: 100dvh;
+  max-height: 100dvh;
   background: rgba(10, 7, 20, 0.98);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-lg);
-  padding: var(--space-lg) max(var(--space-md), env(safe-area-inset-right)) max(var(--space-lg), env(safe-area-inset-bottom)) max(var(--space-md), env(safe-area-inset-left));
+  padding: calc(var(--header-height) + var(--space-lg)) max(var(--space-md), env(safe-area-inset-right)) max(var(--space-lg), env(safe-area-inset-bottom)) max(var(--space-md), env(safe-area-inset-left));
   transform: translateX(100%);
   transition: transform var(--transition-med);
   z-index: 999;
@@ -428,7 +429,7 @@ h3 {
   min-height: 100svh;
   display: flex;
   align-items: center;
-  background: var(--color-bg-dark);
+  background: var(--color-bg-dark) url("../assets/images/hero-bg-poster.jpg") center 30% / cover no-repeat;
   color: var(--color-white);
   overflow: hidden;
   padding-top: calc(var(--header-height) + var(--space-lg));
@@ -916,6 +917,15 @@ h3 {
     padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
   }
 
+  .hero {
+    background-image: url("../assets/images/hero-bg-poster.jpg");
+    background-position: center 30%;
+  }
+
+  .hero__video-bg {
+    display: block;
+  }
+
   .hero__meta { width: 100%; }
   .hero__meta-item { min-width: 0; }
   .hero__meta-item > span { min-width: 0; }
@@ -1041,6 +1051,19 @@ h3 {
   .countdown__unit { padding: var(--space-2xs) var(--space-3xs); }
   .countdown__unit-label { letter-spacing: 0.02em; }
   .brand__text span { display: none; }
+}
+
+/* Títulos: nenhum elemento decorativo antes/depois ou borda estrutural. */
+.hero__title::before,
+.hero__title::after,
+.section-head h2::before,
+.section-head h2::after,
+.section-head h3::before,
+.section-head h3::after {
+  content: none !important;
+  display: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Proteções finais contra overflow em telas muito estreitas. */

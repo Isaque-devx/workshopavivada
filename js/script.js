@@ -23,30 +23,54 @@
 
   /* ------------------------------------------------------------------------
      Vídeo de fundo do Hero
-     Se o usuário pediu "menos animação" no sistema, nem toca o vídeo.
-     Fora isso, só fica rodando enquanto o Hero está visível na tela —
-     assim não gasta processamento/bateria à toa com a página rolada.
+     O MP4 é carregado apenas quando o Hero está próximo da viewport, tanto
+     no desktop quanto no mobile. O poster aparece imediatamente enquanto
+     o navegador prepara o vídeo.
      ---------------------------------------------------------------------- */
   const heroVideo = document.getElementById("heroVideo");
+  const heroSection = document.getElementById("hero");
 
   if (heroVideo) {
-    if (prefersReducedMotion) {
-      heroVideo.pause();
-      heroVideo.removeAttribute("autoplay");
-    } else if ("IntersectionObserver" in window) {
-      const heroVideoObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
+    let heroVideoLoaded = false;
+
+    const loadHeroVideo = () => {
+      if (heroVideoLoaded || prefersReducedMotion) return;
+      const src = heroVideo.dataset.src;
+      if (!src) return;
+
+      heroVideo.src = src;
+      heroVideo.preload = "metadata";
+      heroVideo.load();
+      heroVideoLoaded = true;
+    };
+
+    const playHeroVideo = () => {
+      if (!heroVideoLoaded || prefersReducedMotion) return;
+      heroVideo.play().catch(() => {});
+    };
+
+    if (!prefersReducedMotion) {
+      if ("IntersectionObserver" in window && heroSection) {
+        const heroVideoObserver = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            if (!entry) return;
+
             if (entry.isIntersecting) {
-              heroVideo.play().catch(() => {});
-            } else {
+              loadHeroVideo();
+              playHeroVideo();
+            } else if (heroVideoLoaded) {
               heroVideo.pause();
             }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      heroVideoObserver.observe(heroVideo);
+          },
+          { threshold: 0.1, rootMargin: "200px 0px" }
+        );
+
+        heroVideoObserver.observe(heroSection);
+      } else {
+        loadHeroVideo();
+        playHeroVideo();
+      }
     }
   }
 

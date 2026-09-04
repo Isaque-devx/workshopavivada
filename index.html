@@ -28,7 +28,7 @@
   <link rel="preload" as="font" type="font/woff" href="assets/fonts/hero-new-regular.woff" crossorigin>
   <link rel="preload" as="font" type="font/woff" href="assets/fonts/hero-new-extrabold.woff" crossorigin>
 
-  <link rel="preload" as="image" href="assets/images/hero-art.jpg">
+  <link rel="preload" as="image" href="assets/images/hero-bg-poster.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -83,15 +83,13 @@
         class="hero__video-bg"
         id="heroVideo"
         poster="assets/images/hero-bg-poster.jpg"
-        autoplay
         muted
         loop
         playsinline
-        preload="auto"
+        preload="metadata"
+        data-src="assets/videos/hero-bg.mp4"
         aria-hidden="true"
-      >
-        <source src="assets/videos/hero-bg.mp4" type="video/mp4">
-      </video>
+      ></video>
       <div class="hero__scrim" aria-hidden="true"></div>
       <div class="container hero__grid">
         <div class="hero__content">
