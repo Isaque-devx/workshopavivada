@@ -60,7 +60,6 @@
 
   /* Tons derivados das cores acima (fundos escuros, superfícies, brilho) */
   --color-bg-dark: #0A0714;
-  --color-bg-dark-alt: #120A28;
   --color-bg-light: #FAF9FF;
   --color-surface-dark: #16102E;
   --color-surface-dark-border: rgba(255, 255, 255, 0.09);
@@ -69,7 +68,6 @@
   --color-text-on-dark-muted: #B3ACD1;
 
   --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  --gradient-glow: radial-gradient(circle, rgba(123, 79, 245, 0.55) 0%, rgba(86, 15, 243, 0) 70%);
 
   /* Fontes — Hero New é a fonte oficial da marca */
   --font-display: "Hero New", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -93,14 +91,15 @@
   --space-2xl: 6rem;
   --space-3xl: 8.5rem;
 
-  --container-width: min(1180px, 100% - 3rem);
+  --container-width: min(1180px, calc(100% - 3rem));
 
   /* Raio e sombra */
   --radius-sm: 10px;
   --radius-md: 18px;
   --radius-lg: 28px;
   --radius-pill: 999px;
-  --shadow-glow: 0 20px 60px -15px rgba(86, 15, 243, 0.55);
+  --shadow-btn: 0 10px 24px -10px rgba(20, 8, 50, 0.4);
+  --shadow-btn-hover: 0 16px 34px -12px rgba(20, 8, 50, 0.45);
   --shadow-soft: 0 12px 40px -12px rgba(20, 8, 50, 0.25);
 
   /* Transições */
@@ -132,6 +131,7 @@ body {
   color: var(--color-text);
   background: var(--color-white);
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
 }
 
@@ -198,19 +198,11 @@ svg { display: block; }
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2xs);
   font-size: var(--fs-eyebrow);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-primary);
-}
-.eyebrow::before {
-  content: "";
-  width: 22px;
-  height: 2px;
-  background: var(--color-primary);
-  border-radius: 2px;
 }
 .section--dark .eyebrow { color: #C4AEFF; }
 
@@ -285,9 +277,18 @@ h3 {
 .btn--primary {
   background: var(--color-primary);
   color: var(--color-white);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-btn);
 }
-.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 26px 70px -14px rgba(86, 15, 243, 0.7); }
+.btn--primary:hover { transform: translateY(-2px); background: var(--color-secondary); box-shadow: var(--shadow-btn-hover); }
+.btn--primary:active { transform: translateY(0) scale(0.97); box-shadow: var(--shadow-btn); }
+.btn--primary:disabled,
+.btn--primary[aria-disabled="true"] {
+  background: var(--color-text);
+  opacity: 0.45;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
 
 .btn--ghost {
   background: transparent;
@@ -295,6 +296,13 @@ h3 {
   border: 1.5px solid rgba(255, 255, 255, 0.35);
 }
 .btn--ghost:hover { border-color: var(--color-white); background: rgba(255, 255, 255, 0.06); }
+.btn--ghost:active { background: rgba(255, 255, 255, 0.1); }
+.btn--ghost:disabled,
+.btn--ghost[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+}
 
 /* Ícone de "play" que aparece dentro dos botões (detalhe da identidade visual) */
 .btn__play {
@@ -313,6 +321,8 @@ h3 {
   width: 100%;
   z-index: 1000;
   padding-block: var(--space-sm);
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
   transition: background var(--transition-med), padding var(--transition-med), box-shadow var(--transition-med);
 }
 .site-header.is-scrolled {
@@ -395,9 +405,11 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: var(--space-lg);
+  padding: var(--space-lg) max(var(--space-md), env(safe-area-inset-right)) max(var(--space-lg), env(safe-area-inset-bottom)) max(var(--space-md), env(safe-area-inset-left));
   transform: translateX(100%);
   transition: transform var(--transition-med);
   z-index: 999;
+  overflow-y: auto;
 }
 .mobile-menu[data-state="open"] { transform: translateX(0); }
 .mobile-menu ul {
@@ -434,10 +446,6 @@ h3 {
   background: var(--color-bg-dark);
 }
 
-.hero__glow {
-  display: none;
-}
-
 /* Escurece o vídeo por baixo do texto, senão o texto fica difícil de ler */
 .hero__scrim {
   position: absolute;
@@ -458,7 +466,14 @@ h3 {
   text-align: center;
 }
 
-.hero__content { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); width: 100%; max-width: 980px; }
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: min(100%, 980px);
+  min-width: 0;
+}
 
 .hero__title { color: var(--color-white); }
 .hero__title .line { display: block; }
@@ -526,54 +541,12 @@ h3 {
   letter-spacing: 0.06em;
 }
 
-.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
-
-.hero__visual {
-  position: relative;
-  z-index: 1;
-}
-.hero__frame {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  box-shadow: var(--shadow-glow);
-  border: 1px solid var(--color-surface-dark-border);
-}
-.hero__frame img { width: 100%; height: 100%; object-fit: cover; }
-.hero__frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(10, 7, 20, 0.55) 0%, transparent 45%);
-}
-.hero__frame-tag {
-  position: absolute;
-  bottom: var(--space-sm);
-  left: var(--space-sm);
-  z-index: 2;
+.hero__actions {
   display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  background: rgba(10, 7, 20, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(6px);
-  padding: var(--space-2xs) var(--space-sm);
-  border-radius: var(--radius-pill);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--color-white);
-}
-.hero__frame-tag .dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--color-primary);
-  box-shadow: 0 0 0 0 rgba(123, 79, 245, 0.7);
-  animation: pulse 2.2s infinite;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(123, 79, 245, 0.55); }
-  70% { box-shadow: 0 0 0 10px rgba(123, 79, 245, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(123, 79, 245, 0); }
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
 }
 
 .hero__scroll {
@@ -601,6 +574,7 @@ h3 {
    -------------------------------------------------------------------------- */
 .sobre__grid {
   display: grid;
+  min-width: 0;
   grid-template-columns: 0.9fr 1.1fr;
   gap: var(--space-xl);
   align-items: start;
@@ -630,6 +604,7 @@ h3 {
 .ministracao { overflow: hidden; }
 .ministracao__grid {
   display: grid;
+  min-width: 0;
   grid-template-columns: 0.85fr 1.15fr;
   gap: var(--space-xl);
   align-items: center;
@@ -712,6 +687,7 @@ h3 {
    -------------------------------------------------------------------------- */
 .detalhes__grid {
   display: grid;
+  min-width: 0;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
@@ -745,6 +721,7 @@ h3 {
 .inscricao-section { position: relative; overflow: hidden; }
 .inscricao__panel {
   position: relative;
+  min-width: 0;
   z-index: 1;
   background: var(--color-surface-dark);
   border: 1px solid var(--color-surface-dark-border);
@@ -827,17 +804,8 @@ h3 {
   background: var(--color-bg-dark);
   color: var(--color-white);
   position: relative;
-  overflow: hidden;
-}
-.cta-final__glow {
-  position: absolute;
-  inset: 0;
-  background: var(--color-bg-dark);
-  opacity: 1;
 }
 .cta-final__inner {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -912,39 +880,183 @@ h3 {
 
 /* --------------------------------------------------------------------------
    16. RESPONSIVIDADE
-   Ajustes por tamanho de tela, do maior pro menor (tablet → mobile).
+   Layout adaptativo para desktop, tablet e smartphones.
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .hero__grid { grid-template-columns: 1fr; }
-  .hero__visual { order: -1; max-width: 480px; margin-inline: auto; }
   .sobre__grid,
   .ministracao__grid { grid-template-columns: 1fr; }
   .ministracao__portrait { max-width: 380px; margin-inline: auto; }
-  .ministracao__stats { grid-template-columns: repeat(2, auto); row-gap: var(--space-md); }
-  .detalhes__grid { grid-template-columns: 1fr 1fr; }
+  .ministracao__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-md); }
+  .detalhes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .inscricao__panel { grid-template-columns: 1fr; text-align: left; }
-  .inscricao__price { border-left: none; border-top: 1px solid var(--color-surface-dark-border); padding-left: 0; padding-top: var(--space-lg); }
-  .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .inscricao__price {
+    border-left: none;
+    border-top: 1px solid var(--color-surface-dark-border);
+    padding-left: 0;
+    padding-top: var(--space-lg);
+  }
+  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
   .footer__brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 860px) {
   .nav, .nav-cta { display: none; }
   .menu-toggle { display: flex; }
+
+  .header__inner { gap: var(--space-sm); }
+  .brand { min-width: 0; }
+  .brand__text { min-width: 0; }
+  .brand__text strong,
+  .brand__text span { overflow-wrap: anywhere; }
+
+  .mobile-menu {
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
+    padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+  }
+
+  .hero__meta { width: 100%; }
+  .hero__meta-item { min-width: 0; }
+  .hero__meta-item > span { min-width: 0; }
 }
 
 @media (max-width: 640px) {
-  :root { --header-height: 68px; }
-  .hero { padding-top: calc(var(--header-height) + var(--space-md)); text-align: center; }
-  .hero__meta { gap: var(--space-md) var(--space-lg); }
-  .detalhes__grid { grid-template-columns: 1fr; }
-  .inscricao__panel { padding: var(--space-xl) var(--space-md); }
-  .footer__grid { grid-template-columns: 1fr; }
-  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .site-header { min-height: var(--header-height); }
+
+  :root {
+    --header-height: 68px;
+    --container-width: min(1180px, calc(100% - 2rem));
+    --fs-h1: clamp(2.1rem, 10vw, 3.25rem);
+    --fs-h2: clamp(1.55rem, 6.5vw, 2.1rem);
+    --fs-h3: clamp(1.08rem, 4.8vw, 1.3rem);
+    --fs-body: clamp(0.98rem, 3.8vw, 1.05rem);
+  }
+
+  .site-header { padding-block: var(--space-xs); }
+  .brand__icon { width: 34px; height: 34px; }
+  .brand { font-size: 0.95rem; }
+  .brand__text span { font-size: 0.62rem; }
+  .menu-toggle { width: 44px; height: 44px; flex: 0 0 44px; }
+
+  .hero {
+    min-height: max(100svh, 700px);
+    padding-top: calc(var(--header-height) + var(--space-md));
+    padding-bottom: 5.5rem;
+    text-align: center;
+  }
+  .hero__grid { gap: var(--space-lg); }
+  .hero__content { gap: var(--space-md); }
+  .hero__title { max-width: 100%; }
+  .hero__title .line { overflow-wrap: anywhere; }
+
+  .hero__meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+  }
+  .hero__meta-item {
+    width: 100%;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .hero__countdown { width: 100%; }
+  .hero__countdown-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2xs);
+  }
+  .countdown__unit {
+    min-width: 0;
+    width: 100%;
+    padding: var(--space-xs) var(--space-3xs);
+  }
+  .countdown__value { font-size: clamp(1.35rem, 7vw, 1.8rem); }
+  .countdown__unit-label { font-size: 0.62rem; }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+  .hero__actions .btn,
+  .cta-final .btn,
+  .inscricao__panel .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .hero__scroll { display: none; }
+
   .section { padding-block: var(--space-xl); }
+  .section-head { margin-bottom: var(--space-md); }
+  .section-head h2 { overflow-wrap: anywhere; }
+
+  .sobre__grid,
+  .ministracao__grid { gap: var(--space-lg); }
+  .sobre__lead { font-size: var(--fs-h3); }
+  .sobre__list li { align-items: flex-start; }
+  .sobre__list .num { min-width: 2.25ch; }
+
+  .ministracao__portrait { width: 100%; max-width: 340px; }
+  .ministracao__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+  }
+  .ministracao__stat dd { overflow-wrap: anywhere; }
+
+  .detalhes__grid { grid-template-columns: 1fr; }
+  .detalhes__card { padding: var(--space-md); }
+
+  .inscricao__panel {
+    padding: var(--space-xl) var(--space-md);
+    gap: var(--space-lg);
+  }
+  .inscricao__panel h2 { overflow-wrap: anywhere; }
+  .inscricao__price { align-items: flex-start; }
+  .inscricao__price-value { font-size: clamp(1.75rem, 8vw, 2rem); }
+  .inscricao__note { overflow-wrap: anywhere; }
+
+  .faq__list { width: 100%; }
+  .faq__question { padding: var(--space-md); }
+  .faq__answer p { padding-inline: var(--space-md); }
+
+  .cta-final__inner { width: 100%; }
+  .cta-final h2 { overflow-wrap: anywhere; }
+
+  .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .footer__brand { grid-column: auto; }
+  .footer__brand p { max-width: none; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 400px) {
+  :root { --container-width: min(1180px, calc(100% - 1.5rem)); }
   .hero__meta-item strong { font-size: 0.88rem; }
-  .countdown__unit { min-width: 54px; padding: var(--space-2xs); }
+  .countdown__unit { padding: var(--space-2xs) var(--space-3xs); }
+  .countdown__unit-label { letter-spacing: 0.02em; }
+  .brand__text span { display: none; }
 }
+
+/* Proteções finais contra overflow em telas muito estreitas. */
+html,
+body { max-width: 100%; }
+
+img,
+video,
+svg { max-width: 100%; }
+
+h1,
+h2,
+h3,
+p,
+a,
+button,
+span,
+dd,
+dt { overflow-wrap: break-word; }
