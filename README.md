@@ -157,9 +157,9 @@ O Hero utiliza um vídeo de fundo em loop e sem áudio, acompanhado de uma image
 A estratégia atual utiliza duas versões do vídeo:
 
 - `hero-bg.mp4` — versão principal para telas maiores.
-- `hero-bg-mobile.mp4` — versão mais leve para dispositivos móveis.
+- `hero-bg-mobile.mp4` — versão otimizada para dispositivos móveis, mantendo 1280×720 para preservar nitidez em telas de alta densidade.
 
-O JavaScript escolhe a versão adequada ao viewport e somente inicia o carregamento quando o Hero está próximo da área visível. Quando o Hero sai da área visível, o vídeo é pausado.
+A versão mobile foi reprocessada em 1280×720 com compressão H.264 ajustada para priorizar qualidade sem aumentar desnecessariamente o peso. O JavaScript escolhe a versão adequada ao viewport e somente inicia o carregamento quando o Hero está próximo da área visível. Quando o Hero sai da área visível, o vídeo é pausado.
 
 Também são respeitados:
 
