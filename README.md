@@ -11,6 +11,7 @@ Landing page oficial de divulgação e inscrição do **Workshop de Louvor & Ado
 | **Horário** | 15h às 18h |
 | **Local** | Igreja Cristã Avivada — Rua 95, nº 2, bairro João XXIII, Timóteo - MG |
 | **Investimento** | R$ 39,90 — 2º lote |
+| **Status das inscrições** | Encerradas |
 | **Ministração** | Nívea Izabella — cantora, professora de canto e instrutora ministerial |
 | **Realização** | Igreja Cristã Avivada e Ministério Palavra Viva |
 
@@ -37,13 +38,9 @@ Entre os destaques informados na página estão:
 
 ## Inscrições
 
-As inscrições são realizadas pela plataforma **e-inscrição**, através do link oficial:
+As inscrições foram **encerradas**. A landing page não exibe mais botões ou links ativos para o e-inscrição; os antigos CTAs de inscrição foram substituídos por elementos desativados (`aria-disabled="true"`) com o texto "Inscrições encerradas".
 
-https://www.e-inscricao.com/igreja-crist-avivada/workshopniveaisabella
-
-O valor informado atualmente na landing page é de **R$ 39,90 (2º lote)**.
-
-Para dúvidas sobre pagamento e vagas, o site disponibiliza o Instagram **@igrejacristaavivada**.
+Para dúvidas, o site disponibiliza o Instagram **@igrejacristaavivada**.
 
 ## Localização
 
@@ -126,7 +123,7 @@ O canonical identifica a landing page como URL preferencial para indexação; o 
 - Menu mobile com abertura e fechamento.
 - Fechamento do menu mobile pelo botão, por `Esc` ou ao selecionar um link.
 - Contagem regressiva para o início do evento.
-- Links de inscrição direcionando para a página oficial do e-inscrição.
+- CTAs de inscrição desativados, com a mensagem "Inscrições encerradas" (sem link ativo para o e-inscrição).
 - Link para localização no Google Maps.
 - FAQ em formato de acordeão, mantendo apenas uma pergunta aberta por vez.
 - Animações de entrada dos elementos conforme aparecem na tela.

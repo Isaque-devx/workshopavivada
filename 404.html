@@ -183,6 +183,12 @@
       outline-offset: 3px;
     }
 
+    .btn[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     .event {
       width: min(100%, 700px);
       margin: clamp(38px, 6vw, 58px) auto 0;
@@ -331,11 +337,11 @@
 
         <a
           class="btn btn--secondary"
-          href="https://www.e-inscricao.com/igreja-crist-avivada/workshopniveaisabella"
-          target="_blank"
-          rel="noopener noreferrer"
+          aria-disabled="true"
+          tabindex="-1"
+          role="link"
         >
-          Quero me inscrever
+          Inscrições encerradas
         </a>
       </div>
 
