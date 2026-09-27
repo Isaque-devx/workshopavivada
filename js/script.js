@@ -87,18 +87,31 @@
     const cdHours = document.getElementById("cdHours");
     const cdMinutes = document.getElementById("cdMinutes");
     const cdSeconds = document.getElementById("cdSeconds");
+    const countdownLabel = countdownEl.querySelector(".hero__countdown-label");
+    const countdownGrid = countdownEl.querySelector(".hero__countdown-grid");
 
     const pad = (n) => String(n).padStart(2, "0");
+
+    // Declarado antes de updateCountdown ser chamada pela primeira vez, para
+    // evitar erro ao tentar limpar o intervalo antes dele existir (acontece
+    // quando a página é aberta depois que o evento já terminou).
+    let countdownTimer = null;
+
+    const showCountdownEnded = () => {
+      if (cdDays) cdDays.textContent = "00";
+      if (cdHours) cdHours.textContent = "00";
+      if (cdMinutes) cdMinutes.textContent = "00";
+      if (cdSeconds) cdSeconds.textContent = "00";
+      if (countdownLabel) countdownLabel.textContent = "Evento encerrado";
+      if (countdownGrid) countdownGrid.style.display = "none";
+      if (countdownTimer) clearInterval(countdownTimer);
+    };
 
     const updateCountdown = () => {
       const diff = EVENT_DATE.getTime() - Date.now();
 
       if (diff <= 0) {
-        cdDays.textContent = "00";
-        cdHours.textContent = "00";
-        cdMinutes.textContent = "00";
-        cdSeconds.textContent = "00";
-        clearInterval(countdownTimer);
+        showCountdownEnded();
         return;
       }
 
@@ -110,7 +123,9 @@
     };
 
     updateCountdown();
-    const countdownTimer = setInterval(updateCountdown, 1000);
+    if (EVENT_DATE.getTime() - Date.now() > 0) {
+      countdownTimer = setInterval(updateCountdown, 1000);
+    }
   }
 
   /* ------------------------------------------------------------------------
